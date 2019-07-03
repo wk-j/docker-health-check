@@ -1,0 +1,28 @@
+version: "3.1"
+services:
+  k-connector:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    ports:
+      - 8000:80
+      - 8001:443
+    volumes:
+      - ./docker/k-connector/appsettings.json:/app/appsettings.json
+      - ./docker/cert-aspnetcore.pfx:/root/.dotnet/https/cert-aspnetcore.pfx
+
+    environment:
+      - ASPNETCORE_URLS=https://+;http://+
+      - Kestrel__Certificates__Default__Path=/root/.dotnet/https/cert-aspnetcore.pfx
+      - Kestrel__Certificates__Default__Password=1234
+      - TZ=Asia/Bangkok
+
+  postgres:
+    image: postgres:10.1
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=k-connector
+    command: postgres -c max_connections=300 -c log_min_messages=LOG
+    ports:
+      - 5432:5432
