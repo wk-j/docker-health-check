@@ -20,6 +20,12 @@ services:
     depends_on:
       - postgres
 
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl --fail http://localhost:80/api/values"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+
   postgres:
     image: postgres:10.1
     environment:

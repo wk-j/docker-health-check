@@ -14,4 +14,5 @@ docker-compose up -d --no-deps postgres
 
 ```bash
 docker inspect (docker-compose ps -q web-api) | grep Status
+docker inspect (docker-compose ps -q postgres) | grep Status
 ```
