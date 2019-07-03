@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebApi.Db;
 using WebApi.Settings;
 
-namespace WebApi {
+namespace WebApi.Services {
     public class MainService : IHostedService {
         private readonly AppSettings _settings;
         private readonly ILogger<MainService> _logger;

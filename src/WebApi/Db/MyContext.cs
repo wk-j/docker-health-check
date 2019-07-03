@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApi {
+namespace WebApi.Db {
     public class MyContext : DbContext {
+
         public MyContext(DbContextOptions options) : base(options) {
         }
-        public DbSet<MyContext> Students { set; get; }
+
+        public DbSet<Student> Students { set; get; }
     }
 }

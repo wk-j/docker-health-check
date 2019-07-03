@@ -51,5 +51,11 @@ Task("Install")
         PS.StartProcess($"dotnet tool install   -g {info.PackageId}  --add-source {currentDir}/{publishDir} --version {version}");
     });
 
+Task("Build")
+    .IsDependentOn("Publish")
+    .Does(() => {
+        PS.StartProcess("docker-compose build");
+    });
+
 var target = Argument("target", "Pack");
 RunTarget(target);
