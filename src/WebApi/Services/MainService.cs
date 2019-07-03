@@ -23,8 +23,13 @@ namespace WebApi.Services {
                 .Options;
 
             using (var context = new MyContext(options)) {
-                _logger.LogInformation("create database - {0}", options);
+                _logger.LogInformation("create database - {0}", _settings.ConnectionString);
                 context.Database.EnsureCreated();
+
+                context.Students.Add(new Student { });
+                context.Students.Add(new Student { });
+                context.Students.Add(new Student { });
+                context.SaveChanges();
             }
 
             return Task.CompletedTask;
